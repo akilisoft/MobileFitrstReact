@@ -24,11 +24,11 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-import LoginScreen from './screens/LoginScreen';
+import Navigation from './components/Navigation';
 
 const App: () => React$Node = () => {
   return (
-    <LoginScreen />
+    <Navigation />
   );
 };
 

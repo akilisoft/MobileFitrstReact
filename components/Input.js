@@ -23,6 +23,7 @@ export default class Inputs extends React.Component{
                     inputContainerStyle={styles.inputContainer}
                     inputStyle={styles.inputText}
                     secureTextEntry={this.props.pass}
+                    onChangeText={this.props.onChange}
                     leftIcon={
                         <Icon 
                             name={this.props.icon}

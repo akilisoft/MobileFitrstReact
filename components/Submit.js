@@ -8,6 +8,7 @@ export default class Submit extends React.Component{
             <TouchableOpacity
                 style={[styles.container, 
                     {backgroundColor:this.props.color}]}
+                onPress={this.props.onClick}
             >
                 <Text style={styles.submitText}>{this.props.title}</Text>
             </TouchableOpacity>

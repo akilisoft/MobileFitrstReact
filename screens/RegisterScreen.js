@@ -3,8 +3,40 @@ import {View, StyleSheet, Text, Image, ScrollView} from 'react-native';
 import Inputs from '../components/Input';
 import Submit from '../components/Submit';
 
+import Database from '../Database';
+
+const db = new Database();
+
 
 export default class RegisterScreen extends React.Component{
+
+    state = {
+        name:'',
+        email:'',
+        phone:'',
+        password:'',
+        confirm:''
+    }
+
+    onSubmit = () => {
+
+        let data = {
+            name:this.state.name,
+            email:this.state.email,
+            password:this.state.password,
+            phone:this.state.phone
+        }
+
+        db.addUser(data).then((result)=>{
+            alert("created successfully !!");
+        }).catch((err)=>{
+            console.log(err);
+        })
+
+        //let nameValue = this.state.name;
+        //alert(nameValue);
+    }
+
 
     render(){
         return(
@@ -17,15 +49,29 @@ export default class RegisterScreen extends React.Component{
                     />
                     <Text style={styles.textTitle}>Let's Get Started</Text>
                     <Text style={styles.textBody}>Create an account to get all features</Text>
-                    <Inputs name="Full Name" icon="user" />
-                    <Inputs name="Email" icon="envelope" />
-                    <Inputs name="Phone" icon="phone" />
-                    <Inputs name="Password" icon="lock" pass={true} />
-                    <Inputs name="Confirm Password" icon="lock" pass={true} />
-                    <Submit color="#0251ce" title="CREATE"/>
+                    <Inputs name="Full Name" icon="user" 
+                        onChange={(text)=>this.setState({name:text})}
+                    />
+                    <Inputs name="Email" icon="envelope" 
+                        onChange={(text)=>this.setState({email:text})}
+                    />
+                    <Inputs name="Phone" icon="phone" 
+                        onChange={(text)=>this.setState({phone:text})}
+                    />
+                    <Inputs name="Password" icon="lock" pass={true} 
+                        onChange={(text)=>this.setState({password:text})}
+                    />
+                    <Inputs name="Confirm Password" icon="lock" pass={true} 
+                        onChange={(text)=>this.setState({confirm:text})}
+                    />
+                    <Submit color="#0251ce" title="CREATE" 
+                        onClick={this.onSubmit}/>
                     <View style={{flexDirection:'row'}}>
                         <Text style={styles.textBody}>Already have an account?</Text>
-                        <Text style={[styles.textBody], {color:'blue'}} >
+                        <Text 
+                        style={[styles.textBody], {color:'blue'}} 
+                        onPress={()=>this.props.navigation.navigate('Login')}
+                        >
                             Log in</Text>
                     </View>
                 </View>
